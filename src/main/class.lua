@@ -15,11 +15,13 @@ function class(parent)
 	-- create a new prototype table, inheriting from parent if given
 	local prototype = setmetatable({}, { __index = parent })
 	prototype.__index = prototype
+	local null = {}
 
 	-- define a universal :new() method for instance creation
 	function prototype:new(...)
-		local instance = setmetatable({}, self)
-		if instance.init then
+		local table = self == nil and null or {}
+		local instance = setmetatable(table, self)
+		if self ~= nil and instance.init then
 			instance:init(...)
 		end
 		return instance
@@ -33,10 +35,13 @@ function class(parent)
 		local mt = getmetatable(self)
 		while mt do
 			if mt == class then return true end
-			mt = getmetatable(mt)
+			mt = getmetatable(mt).__index
 		end
 		return false
 	end
+
+	-- define a universal .null constant enabling at least somewhat strongly-typed uninitialized references
+	prototype.null = prototype.new(nil)
 
 	return prototype
 end
