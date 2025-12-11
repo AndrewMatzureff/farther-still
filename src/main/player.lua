@@ -1,11 +1,11 @@
 -- player
 -- Andrew Matzureff
 
---- @class Player
-Player = class(Entity)
+---@class Player: Entity
+Player = class({_super = Entity})
 
 function Player:init(x, y, speed)
-	Entity.init(self, x, y)
+	self._super--[[@as Entity]].init(self, x, y)
 	self.speed = speed
 end
 

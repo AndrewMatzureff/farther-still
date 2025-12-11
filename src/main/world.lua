@@ -1,10 +1,11 @@
 -- world
 -- Logic related to the procedural scrolling ground in the game scene.
 
-World = class(Entity)
+---@class World: Entity
+World = class({_super = Entity})
 
 function World:init(scroll_x, scroll_y, seed)
-	Entity.init(self, 0, 0)
+	self._super--[[@as Entity]].init(self, 0, 0)--Entity.init(self, 0, 0)
 	--self.waveform = AperiodicWaveform:new(5, -1, function (n) return n + 2 end)--Waveform.coefficients(25, -1, function (n) return n + 2 end)--)--0, function (n) return 4 ^ n end))
 	self.seed = seed
 	self.scroll_x = scroll_x

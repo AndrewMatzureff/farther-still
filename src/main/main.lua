@@ -1,12 +1,6 @@
--- main.lua
--- Entry point containing main pico-8 loop hooks (_init(), _update(), _update60(), _draw(), etc.).
+-- main
+-- Andrew Matzureff
 
--- #include main/class.lua
--- #include entity.lua
--- #include player.lua
-
-g_player = Player.null
-g_world = World.null
 g_entities = {}
 g_camera_x = 0.0
 g_camera_y = 0.0
@@ -14,8 +8,8 @@ g_debug = {}
 g_enable_debug = false
 
 function _init()
-	g_player = Player:new(0.0, 0.0, 0.1)
-	g_world = World:new(0, 0, 1)
+	g_player = Player:_new(0, 0, 0.1)--[[@as Player]]
+	g_world  =  World:_new(0, 0,   1)--[[@as World]]
 end
 
 function _update60()
